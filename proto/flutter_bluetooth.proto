@@ -1,0 +1,73 @@
+
+syntax = "proto3";
+
+package flutter_bluetooth;
+
+option java_package = "io.github.rksilvergreen.flutter_bluetooth";
+option java_outer_classname = "Proto";
+
+message AdapterStateMessage {
+  enum AdapterState {
+    TURNING_ON = 0;
+    TURNED_ON = 1;
+    TURNING_OFF = 2;
+    TURNED_OFF = 3;
+  }
+
+  AdapterState state = 1;
+}
+
+message DiscoveryMessage {
+  enum DiscoveryAction {
+    START = 0;
+    FOUND = 1;
+    COMPLETE = 2;
+    CANCLED = 3;
+  }
+
+  DiscoveryAction action = 1;
+  DiscoveryResult result = 2;
+}
+
+message DiscoveryResult {
+  BluetoothDevice device = 1;
+  int32 rssi = 2;
+}
+
+message BondStateMessage {
+  enum BondState {
+    BONDING = 0;
+    BONDED = 1;
+    NONE = 2;
+  }
+
+  BluetoothDevice device = 1;
+  BondState state = 2;
+}
+
+message ConnectionStateMessage {
+  enum ConnectionState {
+    CONNECTING = 0;
+    CONNECTED = 1;
+    DISCONNECTING = 2;
+    DISCONNECTED = 3;
+  }
+
+  BluetoothDevice device = 1;
+  ConnectionState state = 2;
+}
+
+message BluetoothDevice {
+  enum Type {
+    CLASSIC = 0;
+    LE = 1;
+    DUAL = 2;
+    UNKNOWN = 3;
+  };
+
+  string address = 1;
+  string name = 2;
+  Type type = 3;
+}
+
+
